@@ -1,0 +1,35 @@
+{
+  "_comment": "This is Test parametrized image builder",
+  "variables": {
+    "gcp_machine_type": "f1-micro"
+  },
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `gcp_project_id`}}",
+      "image_name": "reddit-base-{{timestamp}}",
+      "image_family": "reddit-base",
+      "source_image_family": "{{user `gcp_image_family`}}",
+      "image_description": "otus study image",
+      "disk_size": "9",
+      "disk_type": "pd-ssd",
+      "network": "default",
+      "tags": "puma-server",
+      "zone": "europe-west1-b",
+      "ssh_username": "appuser",
+      "machine_type": "{{user `gcp_machine_type`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/install_ruby.sh",
+      "execute_command": "sudo {{.Path}}"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/install_mongodb.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
+  ]
+}
