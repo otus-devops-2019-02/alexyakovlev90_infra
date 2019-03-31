@@ -55,5 +55,12 @@ gcloud compute firewall-rules create default-puma-server \
 --target-tags puma-server
 ```
 
+### ДЗ №5 Подготовка базового образа VM при помощи Packer
 
+1. Запуск параметризированной конфигурации 
+```
+packer build \
+    -var-file=variables.json \
+    immutable.json
+```
 

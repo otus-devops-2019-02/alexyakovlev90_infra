@@ -7,13 +7,9 @@
     {
       "type": "googlecompute",
       "project_id": "{{user `gcp_project_id`}}",
-      "image_name": "reddit-base-{{timestamp}}",
-      "image_family": "reddit-base",
+      "image_name": "reddit-full-{{timestamp}}",
+      "image_family": "reddit-full",
       "source_image_family": "{{user `gcp_image_family`}}",
-      "image_description": "otus study image",
-      "disk_size": "9",
-      "disk_type": "pd-ssd",
-      "network": "default",
       "tags": "puma-server",
       "zone": "europe-west1-b",
       "ssh_username": "appuser",
@@ -30,6 +26,26 @@
       "type": "shell",
       "script": "scripts/install_mongodb.sh",
       "execute_command": "sudo {{.Path}}"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/deploy.sh",
+      "execute_command": "sudo {{.Path}}"
+    },
+    {
+      "type": "file",
+      "source": "files/puma.service",
+      "destination": "/tmp/puma.service"
+    },
+    {
+      "inline": [
+        "sudo cp /tmp/puma.service /etc/systemd/system/puma.service",
+        "sudo chmod a+x /etc/systemd/system/puma.service",
+        "sudo systemctl daemon-reload",
+        "sudo systemctl enable puma.service",
+        "sudo systemctl start puma.service"
+      ],
+      "type": "shell"
     }
   ]
 }
