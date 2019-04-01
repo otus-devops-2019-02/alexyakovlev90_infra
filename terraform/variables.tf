@@ -30,5 +30,5 @@ variable zone {
 
 variable instances_count {
   description = "Count of instances"
-  default     = "2"
+  default     = "1"
 }
