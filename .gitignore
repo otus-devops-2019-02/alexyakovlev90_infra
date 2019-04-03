@@ -1,3 +1,10 @@
 /.idea
 *.iml
 /packer/variables.json
+
+# служебные файлы terraform
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+*.tfvars
+.terraform/
