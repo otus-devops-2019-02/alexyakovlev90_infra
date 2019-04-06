@@ -74,3 +74,51 @@ packer build \
 2. При добавлении конфигурации копированием описания инстанца появляется 
 дублирование кода и возникает проблема обновления скриптов при котором 
 инстанцы со временем могут начать отличаться друг от друга
+
+ДЗ №7 
+
+1. Для настройки хранение стейт файла в удаленном бекенде описание бекенда 
+нужно вынести в отдельный файл `backend.tf` с командой:
+```
+terraform {
+  backend "gcs" {
+    bucket  = "bucket-p"
+    prefix  = "terraform/state"
+  }
+}
+```
+При переносе конфигурационных файлов Terraform в произвольную директорию 
+Terraform видит текущее состояние инфраструктуры независимо от директории. 
+При одновременном выполнении команды `terraform apply` будет срабатывать блокировка
+    
+2. Для деплоя приложения добавляем необходимые файлы и provisioner'ы 
+в модуль приложения:
+```
+  provisioner "remote-exec" {
+    inline = [
+      "export DATABASE_URL=${var.mongo_url}",
+    ]
+  }
+
+  # copy file
+  provisioner "file" {
+    source      = "${path.module}/files/puma.service"
+    destination = "/tmp/puma.service"
+  }
+    
+  provisioner "remote-exec" {
+    script = "${path.module}/files/deploy.sh"
+  }
+```
+для передачи внутряннего ip БД исползуем внешнюю переменную в `db` модуле:  
+```
+output "private_ip" {
+    value = "${google_compute_instance.db.network_interface.0.network_ip}"
+}
+```
+    
+
+
+
+
+

@@ -7,8 +7,8 @@
     {
       "type": "googlecompute",
       "project_id": "{{user `gcp_project_id`}}",
-      "image_name": "reddit-base-{{timestamp}}",
-      "image_family": "reddit-base",
+      "image_name": "reddit-app-base-{{timestamp}}",
+      "image_family": "reddit-app-base",
       "source_image_family": "{{user `gcp_image_family`}}",
       "image_description": "otus study image",
       "disk_size": "10",
@@ -24,11 +24,6 @@
     {
       "type": "shell",
       "script": "scripts/install_ruby.sh",
-      "execute_command": "sudo {{.Path}}"
-    },
-    {
-      "type": "shell",
-      "script": "scripts/install_mongodb.sh",
       "execute_command": "sudo {{.Path}}"
     }
   ]
