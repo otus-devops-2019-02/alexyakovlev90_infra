@@ -13,12 +13,12 @@ provider "google" {
 }
 
 module "app" {
-  source          = "../modules/app"
-  public_key_path = "${var.public_key_path}"
-  zone            = "${var.zone}"
-  app_disk_image  = "${var.app_disk_image}"
+  source           = "../modules/app"
+  public_key_path  = "${var.public_key_path}"
+  zone             = "${var.zone}"
+  app_disk_image   = "${var.app_disk_image}"
   private_key_path = "${var.private_key_path}"
-  mongo_url = "${module.db.private_ip}"
+  mongo_url        = "${module.db.private_ip}"
 }
 
 module "db" {
@@ -32,4 +32,3 @@ module "vpc" {
   source        = "../modules/vpc"
   source_ranges = ["0.0.0.0/0"]
 }
-
