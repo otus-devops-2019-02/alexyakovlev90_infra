@@ -168,4 +168,18 @@ output "private_ip" {
 }
 ```
 
+### ДЗ №9 Управление настройками хостов и деплой приложения при помощи Ansible.
+Задание со * - использования dynamic inventory для GCP.
+Для использования dynamic inventory выбран gcp_compute, указанный в 
+https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html#gce-dynamic-inventory
+как наболее удобное решение
 
+Документация по использованию плагина: 
+http://docs.testing.ansible.com/ansible/latest/plugins/inventory/gcp_compute.html
+
+Порядок действий: 
+- добавляем gcp_compute в список плагинов в ansible.cfg
+- создаем yml файл конфигурации dynamic inventory, заканчивающийся на .gcp.yml
+- указываем данный инвентори в ansible.cfg
+- для ссылки на внутренний/внешний ip прописываем в dynamic inventory в разделе 
+compose параметры хостов
