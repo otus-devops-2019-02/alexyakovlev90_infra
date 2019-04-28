@@ -8,3 +8,9 @@
 *.tfstate.backup
 *.tfvars
 .terraform/
+
+# служебные файлы ansible
+*.retry
+
+# gcp
+service-account.json

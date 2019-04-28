@@ -32,21 +32,21 @@ resource "google_compute_instance" "app" {
     private_key = "${file(var.private_key_path)}"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "export DATABASE_URL=${var.mongo_url}",
-    ]
-  }
-
-  # copy file
-  provisioner "file" {
-    source      = "${path.module}/files/puma.service"
-    destination = "/tmp/puma.service"
-  }
-
-  provisioner "remote-exec" {
-    script = "${path.module}/files/deploy.sh"
-  }
+//  provisioner "remote-exec" {
+//    inline = [
+//      "export DATABASE_URL=${var.mongo_url}",
+//    ]
+//  }
+//
+//  # copy file
+//  provisioner "file" {
+//    source      = "${path.module}/files/puma.service"
+//    destination = "/tmp/puma.service"
+//  }
+//
+//  provisioner "remote-exec" {
+//    script = "${path.module}/files/deploy.sh"
+//  }
 }
 
 resource "google_compute_address" "app_ip" {
