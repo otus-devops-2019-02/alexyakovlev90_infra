@@ -3,7 +3,7 @@ projects:
   - infra-235410
 filters:
 auth_kind: serviceaccount
-service_account_file: dynamic/service-account.json
+service_account_file: ./dynamic/service-account.json
 
 keyed_groups:
   - key: labels.ansible_group

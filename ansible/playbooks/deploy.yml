@@ -1,7 +1,7 @@
 ---
 - name: Deploy App
-#  hosts: app
-  hosts: reddit-app
+  hosts: app
+#  hosts: reddit-app
   tags: deploy-tag
   tasks:
     - name: Fetch the latest version of application code
