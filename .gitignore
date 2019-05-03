@@ -14,3 +14,8 @@
 
 # gcp
 service-account.json
+
+# ansible-galaxy roles
+jdauphant.nginx
+
+vault.key

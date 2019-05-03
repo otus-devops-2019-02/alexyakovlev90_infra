@@ -1,0 +1,19 @@
+---
+#https://serverfault.com/questions/638507/how-to-access-host-variable-of-a-different-host-with-ansible
+- name: Gather facts from reddit-db
+  hosts: db
+  tasks: []
+
+- name: Configure App
+  hosts: app
+#  hosts: reddit-app
+  become: true
+#  vars:
+#    db_host: 10.132.0.48
+#    db_host: "{{ reddit-db.networkInterfaces[0].networkIP }}"
+#    db_host: "{{ hostvars['reddit-db']['ansible_default_ipv4']['address'] }}"
+#    db_host: "{{ hostvars['reddit-db']['ansible_private_host'] }}"
+
+  roles:
+    - app
+    - jdauphant.nginx
